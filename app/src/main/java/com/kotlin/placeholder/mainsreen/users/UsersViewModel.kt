@@ -1,5 +1,6 @@
 package com.kotlin.placeholder.mainsreen.users
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.kotlin.placeholder.api.ApiExceptions
 import com.kotlin.placeholder.api.models.User
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class UsersViewModel : ViewModel(), ApiExceptions {
+    val usersData = MutableLiveData<List<User>>()
     private lateinit var model: UsersContractModel
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -26,10 +28,8 @@ class UsersViewModel : ViewModel(), ApiExceptions {
 
     private fun loadUsers() {
         uiScope.launch {
-            val users: List<User>
             try {
-                users = model.loadUsers()
-                debug(UsersViewModel::class, users)
+                usersData.value = model.loadUsers()
             } catch (e: Exception) {
                 handleException(e)
                 debug(UsersViewModel::class, e)

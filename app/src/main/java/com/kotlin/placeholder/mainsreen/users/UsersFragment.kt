@@ -1,5 +1,6 @@
 package com.kotlin.placeholder.mainsreen.users
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -9,9 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kotlin.placeholder.R
+import com.kotlin.placeholder.api.models.User
 import com.kotlin.placeholder.databinding.UsersFragmentBinding
+import com.kotlin.placeholder.utils.debug
 
 class UsersFragment : Fragment() {
+    private val usersViewModel: UsersViewModel
+        get() {
+            return ViewModelProviders.of(this).get(UsersViewModel::class.java)
+        }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<UsersFragmentBinding>(inflater, R.layout.users_fragment, container, false)
@@ -23,12 +30,19 @@ class UsersFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val viewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
-        viewModel.init(UserModel())
+        usersViewModel.init(UserModel())
     }
 
     private fun initBinding() {
+        usersViewModel.usersData.observe(this, Observer {
+            if (it != null) {
+                handleUsers(it)
+            }
+        })
+    }
 
+    private fun handleUsers(users: List<User>) {
+        debug(UsersFragment::class, users)
     }
 
     companion object {
