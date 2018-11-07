@@ -16,6 +16,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "base_url", "https://jsonplaceholder.typicode.com"
+        }
+
+        debug {
+            resValue "string", "base_url", "https://jsonplaceholder.typicode.com"
         }
     }
 
@@ -41,4 +46,15 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$anko_version"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
-}
+
+    /* retrofit integration */
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    /* inceptor */
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"}

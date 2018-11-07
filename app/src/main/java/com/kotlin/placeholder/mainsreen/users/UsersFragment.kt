@@ -1,6 +1,5 @@
-package com.kotlin.placeholder.users
+package com.kotlin.placeholder.mainsreen.users
 
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,8 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.kotlin.placeholder.R
 import com.kotlin.placeholder.databinding.UsersFragmentBinding
-import com.kotlin.placeholder.users.model.UserModel
-import com.kotlin.placeholder.users.viewModel.UsersViewModel
 
 class UsersFragment : Fragment() {
 
@@ -28,7 +25,6 @@ class UsersFragment : Fragment() {
     private fun initViewModel() {
         val viewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
         viewModel.init(UserModel())
-
     }
 
     private fun initBinding() {

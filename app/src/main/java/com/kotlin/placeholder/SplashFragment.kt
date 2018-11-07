@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -14,7 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 
 class SplashFragment : Fragment(), AnkoLogger {
 
-    lateinit var interaction: SplashFragmentInteraction
+    private lateinit var interaction: SplashFragmentInteraction
 
     interface SplashFragmentInteraction {
         fun startApp()
@@ -34,20 +33,15 @@ class SplashFragment : Fragment(), AnkoLogger {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.splash_fragment, container, false)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(500)
+        GlobalScope.launch {
+            delay(1000)
             interaction.startApp()
         }
 
         return view
     }
 
-//    class StartHandlerThread :HandlerThread()
-
     companion object {
-
-        const val TAG = "SplashFragment"
-
         fun newInstance() = SplashFragment()
     }
 }
