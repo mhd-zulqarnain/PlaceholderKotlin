@@ -11,17 +11,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.kotlin.placeholder.R
 import com.kotlin.placeholder.api.models.User
-import com.kotlin.placeholder.databinding.UsersFragmentBinding
+import com.kotlin.placeholder.databinding.FragmentUsersBinding
+import com.kotlin.placeholder.mainsreen.users.adapter.UsersAdapter
 import com.kotlin.placeholder.utils.debug
+import android.support.v7.widget.DividerItemDecoration
+
 
 class UsersFragment : Fragment() {
+    private lateinit var binding: FragmentUsersBinding
     private val usersViewModel: UsersViewModel
         get() {
             return ViewModelProviders.of(this).get(UsersViewModel::class.java)
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<UsersFragmentBinding>(inflater, R.layout.users_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_users, container, false)
 
         initViewModel()
         initBinding()
@@ -42,6 +46,7 @@ class UsersFragment : Fragment() {
     }
 
     private fun handleUsers(users: List<User>) {
+        binding.usersList.adapter = UsersAdapter(users)
         debug(UsersFragment::class, users)
     }
 

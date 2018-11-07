@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.kotlin.placeholder.api.models.User" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/middle_padding"
+            android:text="@{user.name}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/middle_text_size"
+            tools:text="@tools:sample/full_names" />
+
+    </FrameLayout>
+</layout>
