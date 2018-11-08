@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,12 @@ class PhotosFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentPhotosBinding>(inflater, R.layout.fragment_photos, container, false)
 
         initViewModel()
+
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.setSupportActionBar(binding.toolbar.toolbar)
+        appCompatActivity.supportActionBar?.setTitle(R.string.app_name)
+        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        appCompatActivity.supportActionBar?.setDisplayShowHomeEnabled(true)
 
         photosAdapter = PhotosAdapter()
         binding.photosList.adapter = photosAdapter

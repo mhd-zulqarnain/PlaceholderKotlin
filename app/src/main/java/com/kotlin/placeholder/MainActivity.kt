@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity(), SplashFragment.SplashFragmentInteracti
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     private fun startSplashFragment() {
         supportFragmentManager
                 .beginTransaction()
