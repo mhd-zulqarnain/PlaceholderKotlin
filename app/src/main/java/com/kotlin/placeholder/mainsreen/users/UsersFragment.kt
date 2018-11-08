@@ -5,15 +5,16 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.kotlin.placeholder.R
 import com.kotlin.placeholder.api.models.User
 import com.kotlin.placeholder.databinding.FragmentUsersBinding
+import com.kotlin.placeholder.mainsreen.photos.PhotosFragment
 import com.kotlin.placeholder.mainsreen.users.adapter.UsersAdapter
 import com.kotlin.placeholder.utils.debug
 
@@ -57,7 +58,7 @@ class UsersFragment : Fragment(), UsersAdapter.UsersAdapterInteraction {
     }
 
     override fun onClickItem(user: User) {
-        Toast.makeText(context, user.name, Toast.LENGTH_SHORT).show()
+        PhotosFragment.startFragment((activity as FragmentActivity).supportFragmentManager, user)
     }
 
     companion object {
