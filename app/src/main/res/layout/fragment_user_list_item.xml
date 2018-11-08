@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,7 +8,7 @@
             type="com.kotlin.placeholder.api.models.User" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,11 +17,21 @@
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/middle_padding"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_24dp"
             android:padding="@dimen/middle_padding"
             android:text="@{user.name}"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/middle_text_size"
             tools:text="@tools:sample/full_names" />
 
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/user_name"
+            android:layout_marginStart="@dimen/large_padding"
+            android:background="?attr/colorPrimary" />
+
+    </RelativeLayout>
 </layout>
