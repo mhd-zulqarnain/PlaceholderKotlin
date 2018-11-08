@@ -8,7 +8,11 @@ import com.kotlin.placeholder.R
 import com.kotlin.placeholder.api.models.User
 import com.kotlin.placeholder.databinding.FragmentUserListItemBinding
 
-class UsersAdapter(var users: List<User>) : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
+class UsersAdapter(var users: List<User>, var interaction: UsersAdapterInteraction) : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
+
+    interface UsersAdapterInteraction {
+        fun onClickItem(user: User)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,6 +29,7 @@ class UsersAdapter(var users: List<User>) : RecyclerView.Adapter<UsersAdapter.Us
     inner class UsersHolder(var binding: FragmentUserListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.user = user
+            itemView.setOnClickListener { interaction.onClickItem(user) }
         }
     }
 }

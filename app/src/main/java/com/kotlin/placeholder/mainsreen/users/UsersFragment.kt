@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kotlin.placeholder.R
 import com.kotlin.placeholder.api.models.User
 import com.kotlin.placeholder.databinding.FragmentUsersBinding
@@ -17,8 +18,9 @@ import com.kotlin.placeholder.mainsreen.users.adapter.UsersAdapter
 import com.kotlin.placeholder.utils.debug
 
 
-class UsersFragment : Fragment() {
+class UsersFragment : Fragment(), UsersAdapter.UsersAdapterInteraction {
     private lateinit var binding: FragmentUsersBinding
+
     private val usersViewModel: UsersViewModel
         get() {
             return ViewModelProviders.of(this).get(UsersViewModel::class.java)
@@ -50,8 +52,12 @@ class UsersFragment : Fragment() {
     }
 
     private fun handleUsers(users: List<User>) {
-        binding.usersList.adapter = UsersAdapter(users)
+        binding.usersList.adapter = UsersAdapter(users, this)
         debug(UsersFragment::class, users)
+    }
+
+    override fun onClickItem(user: User) {
+        Toast.makeText(context, user.name, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
