@@ -6,13 +6,9 @@
         android:layout_height="match_parent"
         android:background="@color/whiteColor">
 
-        <android.support.v7.widget.Toolbar
+        <include
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:theme="@style/ToolBarStyle" />
+            layout="@layout/toolbar_main" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/users_list"
