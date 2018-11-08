@@ -6,11 +6,21 @@
         android:layout_height="match_parent"
         android:background="@color/whiteColor">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:theme="@style/ToolBarStyle" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/users_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            android:layout_height="0dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
