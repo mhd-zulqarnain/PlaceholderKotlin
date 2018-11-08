@@ -1,5 +1,6 @@
 package com.kotlin.placeholder.mainsreen.photos
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,19 +12,15 @@ import android.view.ViewGroup
 import com.kotlin.placeholder.R
 import com.kotlin.placeholder.api.models.User
 import com.kotlin.placeholder.databinding.FragmentPhotosBinding
-import java.lang.IllegalArgumentException
+import com.kotlin.placeholder.utils.debug
 
 class PhotosFragment : Fragment() {
     private val photosViewModel: PhotosViewModel
-        get() {
-            return ViewModelProviders.of(this)[PhotosViewModel::class.java]
-        }
+        get() = ViewModelProviders.of(this)[PhotosViewModel::class.java]
 
     private val user: User
-        get() {
-            return arguments?.getParcelable(USER)
-                    ?: throw IllegalArgumentException(" there is no user in arguments")
-        }
+        get() = arguments?.getParcelable(USER)
+                ?: throw IllegalArgumentException(" there is no user in arguments")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentPhotosBinding>(inflater, R.layout.fragment_photos, container, false)
@@ -35,6 +32,7 @@ class PhotosFragment : Fragment() {
 
     private fun initViewModel() {
         photosViewModel.init(PhotosModel(), user)
+        photosViewModel.photosData.observe(this, Observer { debug(PhotosFragment::class, it!!) })
     }
 
     companion object {
@@ -52,6 +50,7 @@ class PhotosFragment : Fragment() {
             supportFragmentManager
                     .beginTransaction()
                     .replace(android.R.id.content, newInstance(user))
+                    .addToBackStack(null)
                     .commit()
         }
     }
