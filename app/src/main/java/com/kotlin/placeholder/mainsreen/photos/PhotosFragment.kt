@@ -11,11 +11,18 @@ import android.view.ViewGroup
 import com.kotlin.placeholder.R
 import com.kotlin.placeholder.api.models.User
 import com.kotlin.placeholder.databinding.FragmentPhotosBinding
+import java.lang.IllegalArgumentException
 
 class PhotosFragment : Fragment() {
     private val photosViewModel: PhotosViewModel
         get() {
             return ViewModelProviders.of(this)[PhotosViewModel::class.java]
+        }
+
+    private val user: User
+        get() {
+            return arguments?.getParcelable(USER)
+                    ?: throw IllegalArgumentException(" there is no user in arguments")
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,7 +34,7 @@ class PhotosFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        photosViewModel.init(PhotosModel())
+        photosViewModel.init(PhotosModel(), user)
     }
 
     companion object {
