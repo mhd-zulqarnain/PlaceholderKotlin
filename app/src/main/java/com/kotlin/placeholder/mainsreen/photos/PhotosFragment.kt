@@ -15,6 +15,8 @@ import com.kotlin.placeholder.databinding.FragmentPhotosBinding
 import com.kotlin.placeholder.utils.debug
 
 class PhotosFragment : Fragment() {
+    private lateinit var photosAdapter: PhotosAdapter
+
     private val photosViewModel: PhotosViewModel
         get() = ViewModelProviders.of(this)[PhotosViewModel::class.java]
 
@@ -22,17 +24,21 @@ class PhotosFragment : Fragment() {
         get() = arguments?.getParcelable(USER)
                 ?: throw IllegalArgumentException(" there is no user in arguments")
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentPhotosBinding>(inflater, R.layout.fragment_photos, container, false)
 
         initViewModel()
+
+        photosAdapter = PhotosAdapter()
+        binding.photosList.adapter = photosAdapter
 
         return binding.root
     }
 
     private fun initViewModel() {
         photosViewModel.init(PhotosModel(), user)
-        photosViewModel.photosData.observe(this, Observer { debug(PhotosFragment::class, it!!) })
+        photosViewModel.photosData.observe(this, Observer { it?.let { photos -> photosAdapter.addPhotos(photos) } })
     }
 
     companion object {

@@ -3,7 +3,7 @@ package com.kotlin.placeholder.api.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Address(val street: String, val suite: String, val city: String, val zipCode: String, val geo: Geo):Parcelable {
+data class Address(val street: String?, val suite: String?, val city: String?, val zipCode: String?, val geo: Geo?):Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),

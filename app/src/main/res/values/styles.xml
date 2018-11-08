@@ -12,4 +12,12 @@
         <item name="actionMenuTextColor">@color/whiteColor</item>
     </style>
 
+    <style name="AppTheme.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/large_padding</item>
+    </style>
+
 </resources>

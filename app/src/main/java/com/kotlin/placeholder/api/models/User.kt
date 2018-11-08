@@ -3,7 +3,7 @@ package com.kotlin.placeholder.api.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class User(val id: Int, val name: String, val username: String, val email: String, val address: Address, val website: String) : Parcelable {
+data class User(val id: Int, val name: String?, val username: String?, val email: String?, val address: Address?, val website: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
