@@ -2,6 +2,7 @@ package com.kotlin.placeholder.mainsreen.photos
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.kotlin.placeholder.api.ApiExceptions
 import com.kotlin.placeholder.api.models.Photo
 import com.kotlin.placeholder.api.models.User
 import kotlinx.coroutines.CoroutineScope
@@ -9,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class PhotosViewModel : ViewModel() {
+class PhotosViewModel : ViewModel(), ApiExceptions {
     private lateinit var model: PhotosContractModel
     private lateinit var user: User
     private val viewModelJob = Job()
@@ -29,8 +30,12 @@ class PhotosViewModel : ViewModel() {
 
     private fun loadPhotos() {
         uiScope.launch {
-            model.loadCurrentUserAlbums(user.id).forEach {
-                photosData.value = model.loadAlbumPhotos(it.id)
+            try {
+                model.loadCurrentUserAlbums(user.id).forEach {
+                    photosData.value = model.loadAlbumPhotos(it.id)
+                }
+            } catch (e: Exception) {
+                handleException(e)
             }
         }
     }
